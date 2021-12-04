@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -15,9 +14,9 @@ class LoginControllerTest extends TestCase
         $plainPassword = '123123123';
         $user = User::create(
             [
-                'name'=>'nhattruong',
-                'username'=>'truong',
-                'email'=>'truong@gmail.com',
+                'name'=>'vanTien',
+                'username'=>'tien',
+                'email'=>'tien@gmail.com',
                 'password'=>Hash::make($plainPassword),
             ]
         );
