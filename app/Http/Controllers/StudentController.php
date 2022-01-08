@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\User;
@@ -53,11 +54,10 @@ class StudentController extends Controller
     public function store(Request  $request)
     {
             $request->validate([
-                'name' => 'required|max:255',
-                'class' => 'required|max:255',
-                'email' => 'required|max:255',
-                'phone' => 'required|numeric',
-                
+                'name' => 'alpha|required|max:30',
+                'class' => 'required|max:50',
+                'email' => 'required|string|email|max:100|nullable|ends_with:@gmail.com',
+                'phone' => 'required|numeric|between:10,12',                
             ]);
             Student::create($request->all());
             return redirect()->route('student.index')
@@ -97,13 +97,13 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $updateData = $request->validate([
-            'name' => 'required|max:30',
-            'class' => 'required|max:30',
-            'email' => 'required|max:50',
-            'phone' => 'required|max:30',
+            'name' => 'alpha|required|max:30',
+            'class' => 'required|max:50',
+            'email' => 'required|string|email|max:100|nullable|ends_with:@gmail.com',
+            'phone' => 'required|between:10,12',
         ]);
         $student->update($updateData);
-        return redirect('/student')->with('success', 'Sinh viên cập nhật thành công !');
+        return redirect('/student')->with('success', 'Sinh viên cập nhật thành công!');
     }
 
     /**
